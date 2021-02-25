@@ -92,5 +92,11 @@ class EntityManager:
 
     @classmethod
     def get_entities_with_data(cls, data_comp):
-        """Returns entities with the supplied components"""
+        """Returns entities with the supplied components
+        Parameters
+        ----------
+        data_comp : list
+            must be a list containing the components to be matched against
+        """
+
         return [x for x in cls.tracked_entities.keys() if len(set(data_comp).intersection(cls.tracked_entities[x].keys())) == len(data_comp)]
