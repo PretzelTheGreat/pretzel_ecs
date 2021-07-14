@@ -30,7 +30,7 @@ class EntityManager:
 
     """
 
-    tracked_entities = {"master_entity": {}}
+    tracked_entities = {"top_entity": {}}
 
     @classmethod
     def create_entity(cls, data=None):
