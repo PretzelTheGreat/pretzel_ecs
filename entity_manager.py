@@ -82,13 +82,22 @@ class EntityManager:
         ----------
         entity_id : str
             the entity id to attach the data to
-        data : tuple
-            the data to be attached. the data must be in the following format:
-                (Name of Component [best if it is the name of the class], Object)
+        data : dict, list, tuple
+            the data to be attached. the data must be in one of the following formats:
+                tuple - (Name of Component [best if it is the name of the class], Object)
+                dict - {Name of component: Object, (etc)}
+                list - [list of tuple formats above]
         """
 
         if entity_id in cls.tracked_entities:
-            cls.tracked_entities[entity_id][data[0]] = data[1]
+            if type(data) == tuple:
+                cls.tracked_entities[entity_id][data[0]] = data[1]
+            elif type(data) == dict:
+                for class_name, obj in data.items():
+                    cls.tracked_entities[entity_id][class_name] = obj
+            elif type(data) == list:
+                for item in data:
+                    cls.tracked_entities[entity_id][item[0]] = item[1]
 
     @classmethod
     def get_entities_with_data(cls, data_comp):
