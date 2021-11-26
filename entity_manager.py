@@ -52,14 +52,14 @@ class EntityManager:
 
         if data != None and type(data) == tuple:
             cls.tracked_entities[new_id] = {data[0]: data[1]}
-            return new_id
 
         elif data != None and type(data) == dict:
             cls.tracked_entities[new_id] = data
 
         else:
             cls.tracked_entities[new_id] = {}
-            return new_id
+
+        return new_id
 
     @classmethod
     def get_entity_data(cls, entity_id):
