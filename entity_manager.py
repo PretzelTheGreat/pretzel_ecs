@@ -71,7 +71,7 @@ class EntityManager:
             the entity id to be looked up.
         """
 
-        if entity_id in cls.tracked_entities:
+        if entity_id in cls.tracked_entities.keys():
             return cls.tracked_entities[entity_id]
 
     @classmethod
@@ -89,7 +89,7 @@ class EntityManager:
                 list - [list of tuple formats above]
         """
 
-        if entity_id in cls.tracked_entities:
+        if entity_id in cls.tracked_entities.keys():
             if type(data) == tuple:
                 cls.tracked_entities[entity_id][data[0]] = data[1]
             elif type(data) == dict:
