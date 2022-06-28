@@ -33,10 +33,10 @@ class EntityManager:
     tracked_entities = {"top_entity": {}}
 
     @classmethod
-    def create_entity(cls, data=None):
+    def create_entity(cls, new_id=None, data=None):
         """Creates a new entity to be tracked, and attaches any supplied data.
 
-        If the argument 'data' is not passed in, a new entity id is given (given as a uuid)
+        If the argument 'new_id' is not passed in, a new entity id is given (given as a uuid)
 
         Parameters
         ----------
@@ -48,7 +48,9 @@ class EntityManager:
             in the tuple as the key and the second as the value
         """
 
-        new_id = U4()
+        if new_id == None:
+            # this is just to generate a uuid string to use, don't need to maintain the UUID typing
+            new_id = U4().__str__()
 
         if data != None and type(data) == tuple:
             cls.tracked_entities[new_id] = {data[0]: data[1]}
@@ -76,7 +78,7 @@ class EntityManager:
 
     @classmethod
     def attach_data(cls, entity_id, data):
-        """Attaches new data to an existing entity
+        """Attaches new data to an existing entity. This can also be used to update any data for the entity.
 
         Parameters
         ----------
