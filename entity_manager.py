@@ -40,12 +40,13 @@ class EntityManager:
 
         Parameters
         ----------
-        data : dict, tuple, optional
+        data : dict, tuple, list, optional
             the data that the new entity will be initalized (default is None)
             if the data is given in a dict, the entity data will be set to the dictionary
             supplied
             or if the data is given as a tuple, it will create a new dict with the first entry
             in the tuple as the key and the second as the value
+            if a list is passed, it must be a list of tuples with (key, value) format
         """
 
         if new_id == None:
@@ -57,6 +58,10 @@ class EntityManager:
 
         elif data != None and type(data) == dict:
             cls.tracked_entities[new_id] = data
+
+        elif data != None and type(data) == list:
+            for item in data:
+                cls.tracked_entities[new_id][item[0]] = item[1]
 
         else:
             cls.tracked_entities[new_id] = {}
