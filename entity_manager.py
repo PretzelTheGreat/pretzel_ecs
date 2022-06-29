@@ -59,10 +59,6 @@ class EntityManager:
         elif data != None and type(data) == dict:
             cls.tracked_entities[new_id] = data
 
-        elif data != None and type(data) == list:
-            for item in data:
-                cls.tracked_entities[new_id][item[0]] = item[1]
-
         else:
             cls.tracked_entities[new_id] = {}
 
